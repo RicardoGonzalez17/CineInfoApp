@@ -1,36 +1,62 @@
 import { useState, useEffect } from 'react'
+import Navbar from '../components/Navbar'
+import Header from '../components/Header'
+import Pagination from '../components/Pagination'
+import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [series, setSeries] = useState([])
-  const today = new Date()
-  const day = today.getDate()
-  const month = (today.getMonth() + 1).toString().length < 2 ? `0${today.getMonth() + 1}` : today.getMonth() + 1
-  const year = today.getFullYear()
-  useEffect(() => {
-    const todayWithFormat = `${year}-${month}-${day}`
-    fetch(`https://api.tvmaze.com/schedule/web?date=${todayWithFormat}&country=US`)
-      .then(response => response.json())
-      .then(data => setSeries(data))
-  }, [])
+  const [search, setSearch] = useState('')
+  const [firstSerieResponse, setfirstSerieResponse] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(15)
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
+
+  const indexOfLastPost = currentPage * postsPerPage
+  const indexOfFirstPost = indexOfLastPost - postsPerPage
+  const currentPosts = series.slice(indexOfFirstPost, indexOfLastPost)
   const isSmallScreen = window.innerWidth <= 576
+  useEffect(() => {
+    fetch('https://api.tvmaze.com/shows')
+      .then(response => response.json())
+      .then(data => {
+        setSeries(data)
+        setfirstSerieResponse(data[Math.floor(Math.random() * data.length)])
+      })
+  }, [])
+
+  const handleSearchResult = (data) => {
+    setSearch(data)
+  }
+
+  const filteredSeries = currentPosts.filter(serie => {
+    return serie.name.toLowerCase().includes(search.toLowerCase())
+  })
+
   return (
-    <>
-      <br />
+    <div className='bg-dark'>
+      <div className='mt-5 mb-5'>
+        <Header firstSerie={firstSerieResponse} />
+        <Navbar onSearch={handleSearchResult} />
+      </div>
       <div className='container'>
-        <div className='row'>
+        <div className='row '>
           {
-            series.map(serie => (
-              <div className='col-md-6' key={serie.id}>
-                <div className='card mb-3' style={{ maxWidth: '540px' }}>
+            filteredSeries.map(serie => (
+              <div className='col-md-4' key={serie.id}>
+                <div className='card mb-3 bg-dark border border-dark' style={{ maxWidth: '540px' }}>
                   <div className='row g-0'>
                     <div className={`col-md-4 d-flex align-items-center ${isSmallScreen ? 'justify-content-center' : ''} `}>
                       <img style={{ width: '200px', height: '130px' }} src={serie.image == null ? 'src/images/no-image.png' : serie.image.medium} className='img-fluid rounded-start' alt='Serie´s image' />
                     </div>
                     <div className={`col-md-8 ${isSmallScreen ? 'text-center' : ''}`}>
                       <div className='card-body'>
-                        <h5 className='card-title'>{serie.name}</h5>
-                        <p className='card-text'>Season: {serie.season} Number: {serie.number}</p>
-                        <p className='card-text'><small className='text-body-secondary'>Air time: serie.airtime</small></p>
+                        <Link style={{ textDecorationLine: 'none' }} to={`/details/${serie.id}`}><h5 className='card-title text-warning'>{serie.name}</h5></Link>
+                        <p className='card-text text-white'>Rating: {serie.rating?.average}/10</p>
+                        <p className='card-text'><small className='text-white'>Premiered: {serie.premiered}</small></p>
                       </div>
                     </div>
                   </div>
@@ -39,9 +65,14 @@ const Home = () => {
             )
             )
           }
+          <div className='cold-md-12 d-flex justify-content-center'>
+            <Pagination postsPerPage={postsPerPage} totalPosts={series.length} paginate={paginate} currentPage={currentPage} />
+          </div>
+          <Footer />
+
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
