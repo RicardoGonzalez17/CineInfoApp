@@ -27,6 +27,11 @@ const Navbar = ({ onSearch }) => {
               placeholder='Buscar'
               value={search} aria-label='Buscar'
               onChange={(event) => setSearch(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault() // Previene el comportamiento por defecto
+                }
+              }}
             />
             <button className='btn btn-outline-success' onClick={handleSearch} type='button'>Buscar</button>
           </form>

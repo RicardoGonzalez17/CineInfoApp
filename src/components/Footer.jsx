@@ -11,9 +11,9 @@ const Footer = () => {
               <h5 id='contacto'>¡Contáctame!</h5>
               <div id='div-contacto'>
                 <ul id='ul-contacto'>
-                  <li><a href='https://www.linkedin.com/in/ricardoglezv/' target='_blank' rel='noreferrer'><img src='/src/images/logo-linkedin.png' alt='logo linkedin' /></a></li>
-                  <li><a href='mailto:ricardoisrael.gonzalez@gmail.com'><img src='/src/images/logo-gmail.png' alt='logo gmail' /></a></li>
-                  <li><a href='https://github.com/RicardoGonzalez17' target='_blank' rel='noreferrer'><img src='/src/images/github.png' alt='logo github' /></a></li>
+                  <li><a href='https://www.linkedin.com/in/ricardoglezv/' target='_blank' rel='noreferrer'><img src='/images/logo-linkedin.png' alt='logo linkedin' /></a></li>
+                  <li><a href='mailto:ricardoisrael.gonzalez@gmail.com'><img src='/images/logo-gmail.png' alt='logo gmail' /></a></li>
+                  <li><a href='https://github.com/RicardoGonzalez17' target='_blank' rel='noreferrer'><img src='/images/github.png' alt='logo github' /></a></li>
                 </ul>
               </div>
             </article>

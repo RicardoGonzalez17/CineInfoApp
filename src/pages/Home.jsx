@@ -71,7 +71,7 @@ const Home = () => {
                     <div className='card mb-3 bg-dark border border-dark' style={{ maxWidth: '540px' }}>
                       <div className='row g-0'>
                         <div className={`col-md-4 d-flex align-items-center ${isSmallScreen ? 'justify-content-center' : ''} `}>
-                          <img style={{ width: '200px', height: '130px' }} src={serie.image == null ? 'src/images/no-image.png' : serie.image.medium} className='img-fluid rounded-start' alt='Serie´s image' />
+                          <img style={{ width: '200px', height: '130px' }} src={serie.image == null ? '/images/no-image.png' : serie.image.medium} className='img-fluid rounded-start' alt='Serie´s image' />
                         </div>
                         <div className={`col-md-8 ${isSmallScreen ? 'text-center' : ''}`}>
                           <div className='card-body'>
