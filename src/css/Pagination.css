@@ -1,0 +1,9 @@
+.pagination{
+    cursor: pointer;
+}
+
+.active >.page-link, .page-link.active {
+   background-color: black !important;
+   border-color: #198754 !important;
+   color: white !important; 
+}

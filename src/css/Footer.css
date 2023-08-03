@@ -1,0 +1,31 @@
+footer {
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    height: 100%;
+    font-size: 60%;
+}
+#ul-contacto li a img {
+    height: 20px;
+    width: auto;
+}
+#art-contacto, footer p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#ul-contacto li {
+    list-style: none;
+    float: left;
+    margin-right: 30px;
+}
+#div-contacto{
+    display: flex;
+    justify-content: space-around;
+}
+#ul-contacto li:hover{
+    transform: scale(1.2);
+    transition: .2s;
+ }

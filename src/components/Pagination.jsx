@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/Pagination.css'
 
 const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
   const pageNumbers = []
@@ -6,7 +7,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     pageNumbers.push(index)
   }
   return (
-    <div>
+    <div className='col-md-12 d-flex justify-content-center'>
       <ul className='pagination'>
         {
             pageNumbers.map(number => (
@@ -16,7 +17,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
                 </a>
               </li>
             ))
-        }
+          }
       </ul>
     </div>
   )
